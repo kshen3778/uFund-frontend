@@ -56,12 +56,13 @@
       </div>
       
       <div ng-show="contracts.length != 0">
-        <div ng-repeat="contract in contracts">
+        <div class="panel panel-default" ng-repeat="contract in contracts">
           <!-- loop through contracts -->
           <h3>Address: {{contract.address}}</h3>
           <h3>Price Per Share: {{contract.pricePerShare}}</h3>
           <h3>Time Duration: {{contract.duration}}</h3>
           <h3>Number of Shares: {{contract.numOfShares}}</h3>
+          <h3>Funding Goal: {{contract.fundingGoal}}</h3>
         </div>
       </div>
       

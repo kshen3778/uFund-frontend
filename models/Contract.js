@@ -13,7 +13,8 @@ var contractSchema = new mongoose.Schema({
     address: String,
     pricePerShare: Number,
     duration: Number,
-    numOfShares: Number
+    numOfShares: Number,
+    fundingGoal: Number
 }, schemaOptions);
 
 

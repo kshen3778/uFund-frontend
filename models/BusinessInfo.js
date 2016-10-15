@@ -20,7 +20,7 @@ http.get(options, function(res) {
     console.log(contractABI);
     if (contractABI != '') {
       var MyContract = web3.eth.contract(contractABI);
-      console.log(MyContract.eth.coinbase);
+      console.log(MyContract.eth.mining);
       //var myContractInstance = MyContract.at("0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359");
       //var result = myContractInstance.memberId("0xfe8ad7dd2f564a877cc23feea6c0a9cc2e783715");
       //console.log("result1 : " + result);            

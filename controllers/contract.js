@@ -9,7 +9,8 @@ exports.createContract = function(req, res, next) {
         address: req.body.address,
         pricePerShare: req.body.pricePerShare,
         duration: req.body.duration,
-        numOfShares: req.body.numOfShares
+        numOfShares: req.body.numOfShares,
+        fundingGoal: req.body.numShares*req.body.pricePerShare
     });
 
     contract.save(function(err, contract) {
