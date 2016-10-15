@@ -1,11 +1,21 @@
 angular.module('MyApp')
   .controller('LoginCtrl', function($scope, $rootScope, $location, $window, $auth) {
+    
+    $scope.user = {};
+    $scope.user.type = "";
+    
+    $scope.setType = function(value){
+      $scope.user.type = value;
+      console.log($scope.user.type);
+    };
+    
     $scope.login = function() {
+      console.log($scope.user);
       $auth.login($scope.user)
         .then(function(response) {
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
+          $location.path('/');
         })
         .catch(function(response) {
           $scope.messages = {

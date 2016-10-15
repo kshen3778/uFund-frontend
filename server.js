@@ -20,6 +20,7 @@ var User = require('./models/User');
 // Controllers
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
+var contractController = require('./controllers/contract');
 
 var app = express();
 
@@ -66,6 +67,8 @@ app.post('/signup', userController.signupPost);
 app.post('/login', userController.loginPost);
 app.post('/forgot', userController.forgotPost);
 app.post('/reset/:token', userController.resetPost);
+app.post('/contract', contractController.createContract);
+
 app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
 
 app.get('*', function(req, res) {

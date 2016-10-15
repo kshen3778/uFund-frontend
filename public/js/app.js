@@ -4,10 +4,11 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
 
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'HomeCtrl'
       })
-      .when('/contact', {
-        templateUrl: 'partials/contact.html',
+      .when('/search', {
+        templateUrl: 'partials/search.html',
         controller: 'ContactCtrl'
       })
       .when('/login', {
@@ -41,6 +42,8 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
 
     $authProvider.loginUrl = '/login';
     $authProvider.signupUrl = '/signup';
+
+    
 
     function skipIfAuthenticated($location, $auth) {
       if ($auth.isAuthenticated()) {

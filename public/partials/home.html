@@ -1,36 +1,58 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel">
-        <div class="panel-body">
-          <h3>Heading</h3>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-            Donec sed odio dui.</p>
-          <a href="#" role="button" class="btn btn-default">View details</a>
-        </div>
-      </div>
+<div class="container" ng-show="theuser.address">
+  <div class="panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">Contract Creation</h3>
     </div>
-    <div class="col-sm-4">
-      <div class="panel">
-        <div class="panel-body">
-          <h3>Heading</h3>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-            Donec sed odio dui.</p>
-          <a href="#" role="button" class="btn btn-default">View details</a>
-        </div>
+    <div class="panel-body">
+      <div ng-if="messages.error" role="alert" class="alert alert-danger">
+        <div ng-repeat="error in messages.error">{{error.msg}}</div>
       </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel">
-        <div class="panel-body">
-          <h3>Heading</h3>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-            Donec sed odio dui.</p>
-          <a href="#" role="button" class="btn btn-default">View details</a>
+      <div ng-if="messages.success" role="alert" class="alert alert-success">
+        <div ng-repeat="success in messages.success">{{success.msg}}</div>
+      </div>
+      <form ng-submit="sendContract()" class="form-horizontal">
+        <div class="form-group">
+          <label for="name" class="col-sm-2">Amount of Shares</label>
+          <div class="col-sm-8">
+            <input type="number" name="numOfEthers" class="form-control" ng-model="contract.numOfShares" placeholder="Number of shares to be sold" autofocus>
+          </div>
         </div>
+
+        <div class="form-group">
+          <label for="email" class="col-sm-2">Cost per Share</label>
+          <div class="col-sm-8">
+            <input type="number" name="sharecost" class="form-control" ng-model="contract.pricePerShare" placeholder="Cost (in ether) per share">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="time" class="col-sm-2">Duration of Sale</label>
+          <div class="col-sm-8">
+            <input type="number" name="time" class="form-control" ng-model="contract.duration" placeholder="Time in minutes">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-8">
+            <button type="submit" class="btn btn-success">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container" ng-hide="theuser.address">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-body">
+        <div ng-if="messages.error" role="alert" class="alert alert-danger">
+          <div ng-repeat="error in messages.error">{{error.msg}}</div>
+        </div>
+        <div class="form-group">
+          <label for="address">Ether Address</label>
+          <input type="text" name="address" id="address" placeholder="Ether Address" class="form-control" ng-model="user.address">
+        </div>
+        <button type="submit" class="btn btn-success">Enter</button>
       </div>
     </div>
   </div>

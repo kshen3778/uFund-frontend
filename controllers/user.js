@@ -6,6 +6,7 @@ var moment = require('moment');
 var request = require('request');
 var qs = require('querystring');
 var User = require('../models/User');
+var Business = require('../models/Business');
 
 function generateToken(user) {
   var payload = {
@@ -33,8 +34,7 @@ exports.ensureAuthenticated = function(req, res, next) {
    * Sign in with email and password
    */
   exports.loginPost = function(req, res, next) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
+    req.assert('address', 'Ether address cannot be blank').notEmpty();
     req.assert('password', 'Password cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({ remove_dots: false });
 
@@ -44,19 +44,20 @@ exports.ensureAuthenticated = function(req, res, next) {
       return res.status(400).send(errors);
     }
 
-    User.findOne({ email: req.body.email }, function(err, user) {
-      if (!user) {
-        return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +
-        'Double-check your email address and try again.'
-        });
-      }
-      user.comparePassword(req.body.password, function(err, isMatch) {
-        if (!isMatch) {
-          return res.status(401).send({ msg: 'Invalid email or password' });
+      Business.findOne({ address: req.body.address }, function(err, business) {
+        if (!business) {
+          return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +
+          'Double-check your email address and try again.'
+          });
         }
-        res.send({ token: generateToken(user), user: user.toJSON() });
+        business.comparePassword(req.body.password, function(err, isMatch) {
+          if (!isMatch) {
+            return res.status(401).send({ msg: 'Invalid email or password' });
+          }
+          res.send({ token: generateToken(business), user: business.toJSON() });
+        });
       });
-    });
+
   };
 
 /**
@@ -75,20 +76,22 @@ exports.signupPost = function(req, res, next) {
     return res.status(400).send(errors);
   }
 
-  
-  User.findOne({ email: req.body.email }, function(err, user) {
-    if (user) {
-    return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
-    }
-    user = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password
+    Business.findOne({address: req.body.address}, function(err, business){
+      if (business) {
+      return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
+      }
+      business = new Business({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        desc: req.body.desc,
+        address: req.body.address,
+      });
+      business.save(function(err) {
+      res.send({ token: generateToken(business), user: business });
+      });
     });
-    user.save(function(err) {
-    res.send({ token: generateToken(user), user: user });
-    });
-  });
+    
 };
 
 
