@@ -9,6 +9,17 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
           Contract.sendContract($scope.contract).then(function(response){
               
           });
+          
+      };
+      
+      $scope.address = "";
+      $scope.contracts = [];
+        
+      $scope.loadContracts = function(){
+        Contract.loadContracts().then(function(response){
+            console.log(response);
+           $scope.contracts = response.data; 
+        });
       };
       
 });

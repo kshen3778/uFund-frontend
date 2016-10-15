@@ -1,5 +1,5 @@
 angular.module('MyApp')
-  .controller('HeaderCtrl', function($scope, $location, $window, $auth) {
+  .controller('HeaderCtrl', function($scope, $location, $window, $auth, $route) {
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
@@ -12,5 +12,9 @@ angular.module('MyApp')
       $auth.logout();
       delete $window.localStorage.user;
       $location.path('/');
+      $route.reload();
+    };
+    $scope.reloadRoute = function() {
+      $route.reload();
     };
   });

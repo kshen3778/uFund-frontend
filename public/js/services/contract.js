@@ -3,6 +3,9 @@ angular.module('MyApp')
     return {
       sendContract: function(data) {
         return $http.post('/contract', data);
+      },
+      loadContracts: function(data){
+        return $http.get('/contracts');
       }
     };
   });

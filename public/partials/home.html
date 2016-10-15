@@ -14,21 +14,21 @@
         <div class="form-group">
           <label for="name" class="col-sm-2">Amount of Shares</label>
           <div class="col-sm-8">
-            <input type="number" name="numOfEthers" class="form-control" ng-model="contract.numOfShares" placeholder="Number of shares to be sold" autofocus>
+            <input type="number" name="quantity" min="1" max="999999" class="form-control" ng-model="contract.numOfShares" placeholder="Number of shares to be sold" autofocus>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="email" class="col-sm-2">Cost per Share</label>
+          <label for="number" class="col-sm-2">Cost per Share</label>
           <div class="col-sm-8">
-            <input type="number" name="sharecost" class="form-control" ng-model="contract.pricePerShare" placeholder="Cost (in ether) per share">
+            <input type="number" name="quantity" min="1" max="999999" class="form-control" ng-model="contract.pricePerShare" placeholder="Cost (in ether) per share">
           </div>
         </div>
 
         <div class="form-group">
           <label for="time" class="col-sm-2">Duration of Sale</label>
           <div class="col-sm-8">
-            <input type="number" name="time" class="form-control" ng-model="contract.duration" placeholder="Time in minutes">
+            <input type="number" name="quantity" min="1" max="86400" class="form-control" ng-model="contract.duration" placeholder="Time in minutes">
           </div>
         </div>
         <div class="form-group">
@@ -50,10 +50,21 @@
         </div>
         <div class="form-group">
           <label for="address">Ether Address</label>
-          <input type="text" name="address" id="address" placeholder="Ether Address" class="form-control" ng-model="user.address">
+          <input type="text" name="address" id="address" placeholder="Ether Address" class="form-control" ng-model="address">
         </div>
-        <button type="submit" class="btn btn-success">Enter</button>
+        <button type="submit" ng-click="loadContracts()" class="btn btn-success">Enter</button>
       </div>
+      
+      <div ng-show="contracts.length != 0">
+        <div ng-repeat="contract in contracts">
+          <!-- loop through contracts -->
+          <h3>Address: {{contract.address}}</h3>
+          <h3>Price Per Share: {{contract.pricePerShare}}</h3>
+          <h3>Time Duration: {{contract.duration}}</h3>
+          <h3>Number of Shares: {{contract.numOfShares}}</h3>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>

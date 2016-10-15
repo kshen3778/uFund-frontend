@@ -16,3 +16,9 @@ exports.createContract = function(req, res, next) {
       res.send({ contract: contract });
     });
 };
+
+exports.loadContracts = function(req,res,next){
+    Contract.find({}, function(err, contracts){
+       res.send(contracts); 
+    });
+}

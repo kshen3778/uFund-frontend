@@ -68,6 +68,7 @@ app.post('/login', userController.loginPost);
 app.post('/forgot', userController.forgotPost);
 app.post('/reset/:token', userController.resetPost);
 app.post('/contract', contractController.createContract);
+app.get('/contracts', contractController.loadContracts);
 
 app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
 
