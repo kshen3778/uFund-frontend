@@ -1,7 +1,7 @@
 angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $location, $window, $auth, Account, Contract, BusinessInfo) {
 
     $scope.theuser = $rootScope.currentUser;
-    Chart.defaults.global.colors = ['#00ADF9', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
+    Chart.defaults.global.colors = ['#00ADF9', '#949FB1', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
     $scope.sendContract = function() {
         $scope.contract.businessaddress = $rootScope.currentUser.address;
         $scope.contract.businessname = $rootScope.currentUser.name;
@@ -12,7 +12,17 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
         });
     };
 
-    $scope.chartOptions = {
+    $scope.chartOptions1 = {
+        scales: {
+            yAxes: [{
+                id: 'y-axis-1',
+                type: 'linear',
+                display: true,
+                position: 'left'
+            }]
+        }
+    };
+    $scope.chartOptions2 = {
         scales: {
             yAxes: [{
                 id: 'y-axis-1',
