@@ -25,7 +25,6 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
     $scope.address = "";
     $scope.contracts = [];
 
-    $scope.loadContracts();
     $scope.loadContracts = function() {
         Contract.loadContracts().then(function(response) {
             response.data.forEach(function(item) {
@@ -52,6 +51,7 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
             });
         });
     };
+    $scope.loadContracts();
 
     $scope.businessContracts = [];
     if ($rootScope.currentUser) {
