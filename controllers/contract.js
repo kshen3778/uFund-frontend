@@ -19,7 +19,7 @@ exports.createContract = function(req, res, next) {
 
     
         Business.findOne({
-            address: req.body.address
+            address: req.body.businessaddress
         }, function(err, business) {
             business.shares += (req.body.totalShares - req.body.numOfShares);
             business.save(function(err, business2) {

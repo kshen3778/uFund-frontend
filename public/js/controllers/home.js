@@ -40,6 +40,10 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
                         contractInfo.chartData.push(res.data[i].value);
                         //Integer.parseInt(
                     }
+                    BusinessInfo.getInfo(item.address).then(function(res) {
+                        
+                    });
+                    
                     $scope.contracts.push(contractInfo);
                 });
             });
