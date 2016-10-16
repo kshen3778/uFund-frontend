@@ -1,7 +1,7 @@
 angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $location, $window, $auth, Account, Contract, BusinessInfo) {
 
     $scope.theuser = $rootScope.currentUser;
-    Chart.defaults.global.colors = ['#DCDCDC', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
+    Chart.defaults.global.colors = ['#00ADF9', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
     $scope.sendContract = function() {
         $scope.contract.businessaddress = $rootScope.currentUser.address;
         $scope.contract.businessname = $rootScope.currentUser.name;
