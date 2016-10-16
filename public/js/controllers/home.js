@@ -1,7 +1,7 @@
 angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $location, $window, $auth, Account, Contract, BusinessInfo) {
 
     $scope.theuser = $rootScope.currentUser;
-    Chart.defaults.global.colors = ['#5cb360', '#DCDCDC', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
+    Chart.defaults.global.colors = ['#DCDCDC', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
     $scope.sendContract = function() {
         $scope.contract.businessaddress = $rootScope.currentUser.address;
         $scope.contract.businessname = $rootScope.currentUser.name;
@@ -25,6 +25,7 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
     $scope.address = "";
     $scope.contracts = [];
 
+    $scope.loadContracts();
     $scope.loadContracts = function() {
         Contract.loadContracts().then(function(response) {
             response.data.forEach(function(item) {
@@ -36,7 +37,7 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
                         contractInfo.chartLabels.push(res.data[i].date);
                         contractInfo.chartData.push(res.data[i].value);
                     }
-                    BusinessInfo.getInfo(item.address).then(function(res) {
+                    /*BusinessInfo.getInfo(item.address).then(function(res) {
                         contractInfo.chartLabels2 = [];
                         contractInfo.chartData2 = [];
                         var numShares = 0;
@@ -44,9 +45,9 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
                             contractInfo.chartLabels.push(res.data[i].date);
                             numShares+=(res.data[i].value/item.shareprice);
                             contractInfo.chartData.push(numShares);
-                        }
+                        }*/
                         $scope.contracts.push(contractInfo);
-                    });
+                    //});
                 });
             });
         });
