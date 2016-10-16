@@ -26,7 +26,8 @@ var smartContractController = require('./controllers/smartcontract');
 var ethController = require('./uFund/ethContract.js');
 
 var app = express();
-var compiled = ethController.compile();
+//var compiled = ethController.compile();
+//global.compiled = ethController.compile();
 
 mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {

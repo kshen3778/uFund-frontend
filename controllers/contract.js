@@ -1,6 +1,7 @@
 var nodemailer = require('nodemailer');
 var Contract = require('../models/Contract');
 var Business = require('../models/Business');
+var ethController = require('../uFund/ethContract');
 
 /**
  * POST /contact
@@ -25,6 +26,15 @@ exports.createContract = function(req, res, next) {
             business.shares += (req.body.totalShares - req.body.numOfShares);
             business.save(function(err, business2) {
                 console.log(contract);
+                /*var info = {
+                    name: contract.name,
+                    address: contract.address,
+                    numShares: contract.totalShares,
+                    numSelling: contract.numOfShares,
+                    price: contract.pricePerShare,
+                    duration: contract.duration
+                };
+                ethController.createContract(compiled, info);*/
                 res.send({
                     contract: contract
                 });

@@ -25,9 +25,12 @@ angular.module('MyApp')
         .catch(function(response) {
           if (response.error) {
             $scope.messages = {
-              error: [{ msg: response.error }]
+              error: [{
+                msg: response.error
+              }]
             };
-          } else if (response.data) {
+          }
+          else if (response.data) {
             $scope.messages = {
               error: [response.data]
             };

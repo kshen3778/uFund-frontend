@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="name" class="col-sm-2">Amount of Shares</label>
+          <label for="name" class="col-sm-2">Amount of Shares To Be Sold</label>
           <div class="col-sm-8">
             <input type="number" name="quantity" min="1" max="{{contract.totalShares}}" class="formlogin" ng-model="contract.numOfShares" placeholder="Number of shares to be sold" autofocus>
           </div>
@@ -59,11 +59,9 @@
           </div>
         </div>
       </form>
-    </div>
-    <div class="newspaper">
       <div class="panel">
-        <div ng-show="businessContracts.length != 0">
-          <!--<div class="panel-body" ng-repeat="contract in businessContracts">
+        <div ng-show="businessContracts.length != 0" style="margin-bottom: 70px;">
+          <div class="panel-body" ng-repeat="contract in businessContracts">
             <div class="form-group">
               <h5><b>NAME:</b> {{contract.name}}</h5>
               <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
@@ -71,7 +69,7 @@
               <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
               <br>
             </div>
-          </div>-->
+          </div>
         </div>
       </div>
     </div>
@@ -110,72 +108,32 @@
     <div ng-repeat="contract in contracts">
       <!-- loop through contracts -->
       <div class="panel">
-        <div class="panel-body">
+        <div class="panel-body" >
           <div class="form-group">
-            <h5><b>BUSINESS NAME:</b> {{contract.businessname}}</h5>
+            <h4><b>BUSINESS NAME:</b> {{contract.businessname}}</h4>
+            <h6><b>ADDRESS:</b> {{contract.address}}</h6>
           </div>
+
         </div>
-      </div>
-      <div class="table">
-        <div class="row">
-          <div class="col content">
+        <div class="table">
+          <div class="row" style="height: 250px;">
+            <div class="col-sm-5">
 
               <div class="panel-body">
                 <h5><b>NAME:</b> {{contract.name}}</h5>
-                <h5><b>ADDRESS:</b> {{contract.address}}</h5>
                 <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
                 <h5><b>TIME DURATION:</b> {{contract.duration}}</h5>
                 <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
               </div>
 
-          </div>
-          <div class="col sidebar">
-            <h4>Purchase Shares</h4>
-            <div class="form-group">
-              <!--<label for="name" class="col-sm-3">Purchase Shares</label> -->
-              <input type="number" name="quantity" min="1" max="contract.numOfShares" class="formlogin" ng-model="contract.boughtShares" placeholder="Number of shares" autofocus>
             </div>
 
-            <button type="submit" class="w3-btn-block w3-green w3-animate-opacity">Purchase</button>
-          </div>
-          <div class="col">
-            <canvas id="businessInfoChart" class="chart chart-line" chart-data="contract.chartData" chart-labels="contract.chartLabels" width="150" height="150"></canvas>
+            <div class="col-sm-7">
+              <canvas id="businessInfoChart" class="chart chart-line" chart-data="contract.chartData" chart-labels="contract.chartLabels" chart-options="chartOptions" chart-dataset-override="datasetOverride" width="700" height="300" style="margin-top: 30px;"></canvas>
+            </div>
           </div>
         </div>
       </div>
-
-      <!--
-      <div class="newspaper">
-        <div class="panel">
-          <div class="panel-body">
-            <h5><b>NAME:</b> {{contract.name}}</h5>
-            <h5><b>ADDRESS:</b> {{contract.address}}</h5>
-            <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
-            <h5><b>TIME DURATION:</b> {{contract.duration}}</h5>
-            <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
-
-          </div>
-        </div>
-<br>
-<h2></h2>
-
-        <div class="panel">
-          <div class="panel-body">
--->
-
-      <!--graph goes below     chart-series="lineSeries" chart-options="lineOptions"-->
-      <!--           <canvas id="businessInfoChart" class="chart chart-line" chart-data="contract.chartData" chart-labels="contract.chartLabels"></canvas>
-
-            <label for="name" class="col-sm-3">Purchase Shares</label>
-            <div class="col-sm-8">
-              <input type="number" name="quantity" min="1" max="contract.numOfShares" class="formlogin" ng-model="contract.boughtShares" placeholder="Purchase number of shares" autofocus>
-            </div>
-
-            <button type="submit" class="w3-btn-block w3-green w3-animate-opacity">Purchase</button>
--->
     </div>
   </div>
-</div>
-</div>
-</div>
 </div>

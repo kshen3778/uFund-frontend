@@ -12,6 +12,18 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
         });
     };
 
+    $scope.chartOptions = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left'
+        }
+      ]
+    }
+  };
     $scope.address = "";
     $scope.contracts = [];
 
@@ -20,18 +32,15 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
                 response.data.forEach(function(item){
                 BusinessInfo.getInfo(item.address).then(function(res) {
                     var contractInfo = item;
-                    //console.log(contractInfo);
-                    var businessPurchaseDates = [];
-                    var businessPurchaseValues = [];
-                    
+                    console.log(res);
+                    contractInfo.chartLabels = [];
+                    contractInfo.chartData = [];
                     for (var i = 0; i < res.data.length; i++) {
-                        businessPurchaseDates.push(res.data[i].date);
-                        businessPurchaseValues.push(Integer.parseInt(res.data[i].value));
+                        contractInfo.chartLabels.push(res.data[i].date);
+                        contractInfo.chartData.push(res.data[i].value);
+                        //Integer.parseInt(
                     }
-                    contractInfo.chartLabels = businessPurchaseDates;
-                    contractInfo.chartData = businessPurchaseValues;
                     $scope.contracts.push(contractInfo);
-                    console.log($scope.contracts);
                 });
             });
         });

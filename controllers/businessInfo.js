@@ -14,9 +14,10 @@ exports.getInfo = function(req, res, next) {
           if (parsedBody[i].value != 0) {
             var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
             d.setUTCSeconds(parsedBody[i].timeStamp);
+            var formattedArray = d.getMonth()+"/"+d.getDate()+"/"+d.getFullYear();
             transactionsArr.push({
-              "date" : d,
-              "value": parsedBody[i].value
+              "date" : formattedArray,
+              "value": parsedBody[i].value/1000000000000000000
             });
           }
         }
