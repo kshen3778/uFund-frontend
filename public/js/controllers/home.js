@@ -36,17 +36,17 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
                         contractInfo.chartLabels.push(res.data[i].date);
                         contractInfo.chartData.push(res.data[i].value);
                     }
-                    /*BusinessInfo.getInfo(item.address).then(function(res) {
+                    BusinessInfo.getInfo(item.address).then(function(res) {
                         contractInfo.chartLabels2 = [];
                         contractInfo.chartData2 = [];
                         var numShares = 0;
                         for (var i = 0; i < res.data.length; i++) {
                             contractInfo.chartLabels.push(res.data[i].date);
-                            numShares+=(res.data[i].value/item.shareprice);
+                            numShares+=(res.data[i].value/item.pricePerShare);
                             contractInfo.chartData.push(numShares);
-                        }*/
+                        }
                         $scope.contracts.push(contractInfo);
-                    //});
+                    });
                 });
             });
         });
