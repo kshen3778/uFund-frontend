@@ -41,9 +41,9 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
                         contractInfo.chartData2 = [];
                         var numShares = 0;
                         for (var i = 0; i < res.data.length; i++) {
-                            contractInfo.chartLabels.push(res.data[i].date);
+                            contractInfo.chartLabels2.push(res.data[i].date);
                             numShares+=(res.data[i].value/item.pricePerShare);
-                            contractInfo.chartData.push(numShares);
+                            contractInfo.chartData2.push(numShares);
                         }
                         $scope.contracts.push(contractInfo);
                     });
