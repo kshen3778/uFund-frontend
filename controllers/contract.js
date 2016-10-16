@@ -30,10 +30,7 @@ exports.createContract = function(req, res, next) {
                 });
             });
         });
-
-
     });
-
 };
 
 exports.loadContracts = function(req, res, next) {

@@ -1,15 +1,17 @@
 <style>
   .newspaper {
     -webkit-column-count: 2;
-    /* Chrome, Safari, Opera */
     -webkit-column-gap: 40px;
+    -webkit-column-fill: balance;
+  }
+  
+  h2 {
+    -webkit-column-span: all;
     /* Chrome, Safari, Opera */
-    /*-webkit-column-rule: 1px solid lightblue;*/
-    /* Chrome, Safari, Opera */
+    column-span: all;
   }
 </style>
 <!-- Create contract  -->
-
 <div class="container" ng-show="theuser">
   <div class="panel">
     <div class="panel-heading">
@@ -22,35 +24,33 @@
       <div ng-if="messages.success" role="alert" class="alert alert-success">
         <div ng-repeat="success in messages.success">{{success.msg}}</div>
       </div>
-
-
       <form ng-submit="sendContract()" class="form-horizontal">
         <div class="form-group">
           <label for="address">Name</label>
-          <input type="text" name="name" id="name" placeholder="Contract name" class="form-control" ng-model="contract.name">
+          <input type="text" name="name" id="name" placeholder="Contract name" class="formlogin" ng-model="contract.name">
         </div>
         <div class="form-group">
           <label for="name" class="col-sm-2">Total Amount of Shares</label>
           <div class="col-sm-8">
-            <input type="number" name="quantity" min="1" max="999999" class="form-control" ng-model="contract.totalShares" placeholder="Number of shares in total" autofocus>
+            <input type="number" name="quantity" min="1" max="999999" class="formlogin" ng-model="contract.totalShares" placeholder="Number of shares in total" autofocus>
           </div>
         </div>
         <div class="form-group">
           <label for="name" class="col-sm-2">Amount of Shares</label>
           <div class="col-sm-8">
-            <input type="number" name="quantity" min="1" max="{{contract.totalShares}}" class="form-control" ng-model="contract.numOfShares" placeholder="Number of shares to be sold" autofocus>
+            <input type="number" name="quantity" min="1" max="{{contract.totalShares}}" class="formlogin" ng-model="contract.numOfShares" placeholder="Number of shares to be sold" autofocus>
           </div>
         </div>
         <div class="form-group">
           <label for="name" class="col-sm-2">Cost per Share</label>
           <div class="col-sm-8">
-            <input type="number" name="quantity" min="1" max="999999" class="form-control" ng-model="contract.pricePerShare" placeholder="Cost of share (in Ether)" autofocus>
+            <input type="number" name="quantity" min="1" max="999999" class="formlogin" ng-model="contract.pricePerShare" placeholder="Cost of share (in Ether)" autofocus>
           </div>
         </div>
         <div class="form-group">
           <label for="time" class="col-sm-2">Duration of Sale</label>
           <div class="col-sm-8">
-            <input type="number" name="quantity" min="1" max="86500" class="form-control" ng-model="contract.duration" placeholder="Time in minutes">
+            <input type="number" name="quantity" min="1" max="86500" class="formlogin" ng-model="contract.duration" placeholder="Time in minutes">
           </div>
         </div>
         <div class="form-group">
@@ -59,31 +59,22 @@
           </div>
         </div>
       </form>
-
     </div>
-
-
-  </div>
-
-  <div class="newspaper">
-
-    <div class="panel">
-      <div ng-show="businessContracts.length != 0">
-        <div class="panel-body" ng-repeat="contract in businessContracts">
-          <!-- loop through contracts -->
-          <div class="form-group">
-            <h5><b>NAME:</b> {{contract.name}}</h5>
-            <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
-            <h5><b>TIME DURATION:</b> {{contract.duration}}</h5>
-            <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
-            <br>
-          </div>
+    <div class="newspaper">
+      <div class="panel">
+        <div ng-show="businessContracts.length != 0">
+          <!--<div class="panel-body" ng-repeat="contract in businessContracts">
+            <div class="form-group">
+              <h5><b>NAME:</b> {{contract.name}}</h5>
+              <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
+              <h5><b>TIME DURATION:</b> {{contract.duration}}</h5>
+              <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
+              <br>
+            </div>
+          </div>-->
         </div>
       </div>
-      <!--graph of company's past transactions-->
-
     </div>
-
   </div>
 </div>
 
@@ -97,15 +88,8 @@
 
 
 
-
-
-
-
-
 <!-- User-->
-
-
-<div class="container" ng-hide="theuser">
+<div class="container" ng-hide="theuser" style="margin-bottom: 80px;">
   <!-- Input Ether Address -->
   <div class="panel">
     <div class="panel-body">
@@ -114,16 +98,11 @@
       </div>
       <div class="form-group">
         <label for="address">Your Ether Address</label>
-        <input type="text" name="address" id="address" placeholder="Ether Address" class="form-control" ng-model="address">
+        <input type="text" name="address" id="address" placeholder="Ether Address" class="formlogin" ng-model="address">
       </div>
       <button type="submit" ng-click="loadContracts()" class="w3-btn-block w3-green w3-animate-opacity">Enter</button>
     </div>
   </div>
-
-
-  <!-- Newspaper 
-
-        Display Contracts-->
 
 
 
@@ -137,6 +116,35 @@
           </div>
         </div>
       </div>
+      <div class="table">
+        <div class="row">
+          <div class="col content">
+
+              <div class="panel-body">
+                <h5><b>NAME:</b> {{contract.name}}</h5>
+                <h5><b>ADDRESS:</b> {{contract.address}}</h5>
+                <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
+                <h5><b>TIME DURATION:</b> {{contract.duration}}</h5>
+                <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
+              </div>
+
+          </div>
+          <div class="col sidebar">
+            <h4>Purchase Shares</h4>
+            <div class="form-group">
+              <!--<label for="name" class="col-sm-3">Purchase Shares</label> -->
+              <input type="number" name="quantity" min="1" max="contract.numOfShares" class="formlogin" ng-model="contract.boughtShares" placeholder="Number of shares" autofocus>
+            </div>
+
+            <button type="submit" class="w3-btn-block w3-green w3-animate-opacity">Purchase</button>
+          </div>
+          <div class="col">
+            <canvas id="businessInfoChart" class="chart chart-line" chart-data="contract.chartData" chart-labels="contract.chartLabels" width="150" height="150"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!--
       <div class="newspaper">
         <div class="panel">
           <div class="panel-body">
@@ -145,48 +153,29 @@
             <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
             <h5><b>TIME DURATION:</b> {{contract.duration}}</h5>
             <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
-            <!--graph goes below     chart-series="lineSeries" chart-options="lineOptions"-->
-          <canvas id="businessInfoChart" class="chart chart-line" chart-data="contract.chartData" chart-labels="contract.chartLabels"></canvas>
-            <br>
 
-            <label for="name" class="col-sm-2">Purchase Shares</label>
-
-            <div class="col-sm-3">
-              <input type="number" name="quantity" min="1" max="contract.numOfShares" class="form-control" ng-model="contract.boughtShares" placeholder="Purchase number of shares" autofocus>
-            </div>
-
-            <div class="col-sm-offset-2 col-sm-8">
-              <button type="submit" class="btn btn-success">Purchase</button>
-            </div>
           </div>
         </div>
-      </div>
+<br>
+<h2></h2>
+
+        <div class="panel">
+          <div class="panel-body">
+-->
+
+      <!--graph goes below     chart-series="lineSeries" chart-options="lineOptions"-->
+      <!--           <canvas id="businessInfoChart" class="chart chart-line" chart-data="contract.chartData" chart-labels="contract.chartLabels"></canvas>
+
+            <label for="name" class="col-sm-3">Purchase Shares</label>
+            <div class="col-sm-8">
+              <input type="number" name="quantity" min="1" max="contract.numOfShares" class="formlogin" ng-model="contract.boughtShares" placeholder="Purchase number of shares" autofocus>
+            </div>
+
+            <button type="submit" class="w3-btn-block w3-green w3-animate-opacity">Purchase</button>
+-->
     </div>
   </div>
 </div>
 </div>
-
-
-<!-- 
-
-  <div class="panel">
-    <div class="panel-body">
-    
-    
-      <div ng-if="messages.error" role="alert" class="alert alert-danger">
-        <div ng-repeat="error in messages.error">{{error.msg}}</div>
-      </div>
-      
-      
-      <div class="form-group">
-    
-        <label for="address">Ether Address</label>
-        <input type="text" name="address" id="address" placeholder="Ether Address" class="form-control" ng-model="address">
-      </div>
-      
-      
-      <button type="submit" ng-click="loadContracts()" class="btn btn-success">Enter</button>
-    </div>
-  </div>
-  
-  -->
+</div>
+</div>

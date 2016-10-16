@@ -1,7 +1,7 @@
 angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $location, $window, $auth, Account, Contract, BusinessInfo) {
 
     $scope.theuser = $rootScope.currentUser;
-
+    Chart.defaults.global.colors = ['#5cb360', '#DCDCDC', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
     $scope.sendContract = function() {
         $scope.contract.address = $rootScope.currentUser.address;
         $scope.contract.businessname = $rootScope.currentUser.name;
@@ -17,32 +17,27 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
 
     $scope.loadContracts = function() {
         Contract.loadContracts().then(function(response) {
-            console.log(response);
-            for (var a = 0; a < response.data.length; a++) {
-                var contractInfo = response.data[a];
-                
-                var businessPurchaseDates = [];
-                var businessPurchaseValues = [];
-                BusinessInfo.getInfo(response.data[0].address).then(function(response) {
-                    for (var i = 0; i < response.data[a].length; i++) {
-                        businessPurchaseDates.push(response.data[a].date);
-                        businessPurchaseValues.push(response.data[a].value);
+                response.data.forEach(function(item){
+                BusinessInfo.getInfo(item.address).then(function(res) {
+                    var contractInfo = item;
+                    //console.log(contractInfo);
+                    var businessPurchaseDates = [];
+                    var businessPurchaseValues = [];
+                    
+                    for (var i = 0; i < res.data.length; i++) {
+                        businessPurchaseDates.push(res.data[i].date);
+                        businessPurchaseValues.push(Integer.parseInt(res.data[i].value));
                     }
+                    contractInfo.chartLabels = businessPurchaseDates;
+                    contractInfo.chartData = businessPurchaseValues;
+                    $scope.contracts.push(contractInfo);
+                    console.log($scope.contracts);
                 });
-                contractInfo.chartLabels = businessPurchaseDates;
-                contractInfo.chartData = businessPurchaseValues;
-                /*$scope.contracts = response.data;
-                $scope.contracts = data: {
-                    labels: ['Item 1', 'Item 2', 'Item 3'],
-                    data: [10, 20, 30]
-                }*/
-                $scope.contracts.push(contractInfo);
-            }
+            });
         });
     };
 
     $scope.businessContracts = [];
-    console.log($rootScope.currentUser);
     if ($rootScope.currentUser) {
         Contract.loadBusinessContracts($rootScope.currentUser.address).then(function(response) {
             console.log(response);

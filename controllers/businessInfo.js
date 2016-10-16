@@ -6,7 +6,7 @@ var address = '0x2b645ae3bce483b26b65b934513af0228f46bdfa';
 
 
 exports.getInfo = function(req, res, next) {
-  request('http://testnet.etherscan.io/api?module=account&action=txlist&address=' + address + '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc', function(error, response, body) {
+  request('http://testnet.etherscan.io/api?module=account&action=txlist&address=' + req.params.address + '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc', function(error, response, body) {
       var transactionsArr = [];
       if (!error && response.statusCode == 200) {
         var parsedBody = JSON.parse(body).result;
@@ -15,7 +15,7 @@ exports.getInfo = function(req, res, next) {
             var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
             d.setUTCSeconds(parsedBody[i].timeStamp);
             transactionsArr.push({
-              "date:": d,
+              "date" : d,
               "value": parsedBody[i].value
             });
           }
