@@ -10,11 +10,13 @@ var schemaOptions = {
 };
 
 var contractSchema = new mongoose.Schema({
+    name: { type: String, unique: true},
+    businessname: String,
     address: String,
     pricePerShare: Number,
     duration: Number,
     numOfShares: Number,
-    fundingGoal: Number
+    totalShares: Number
 }, schemaOptions);
 
 

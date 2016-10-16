@@ -12,6 +12,7 @@ var schemaOptions = {
 var businessSchema = new mongoose.Schema({
   name: String,
   email: { type: String, unique: true},
+  shares: Number,
   desc: String,
   address: { type: String, unique: true},
   password: String,

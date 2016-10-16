@@ -21,6 +21,8 @@ var User = require('./models/User');
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
 var contractController = require('./controllers/contract');
+var businessInfoController = require('./controllers/businessInfo');
+var smartContractController = require('./controllers/smartcontract');
 
 var app = express();
 
@@ -61,6 +63,7 @@ app.use(function(req, res, next) {
 });
 
 app.post('/contact', contactController.contactPost);
+app.get('/businessinfo/:address', businessInfoController.getInfo);
 app.put('/account', userController.ensureAuthenticated, userController.accountPut);
 app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
 app.post('/signup', userController.signupPost);
@@ -69,7 +72,7 @@ app.post('/forgot', userController.forgotPost);
 app.post('/reset/:token', userController.resetPost);
 app.post('/contract', contractController.createContract);
 app.get('/contracts', contractController.loadContracts);
-
+app.get('/contracts/:address', contractController.loadBusinessContracts);
 app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
 
 app.get('*', function(req, res) {

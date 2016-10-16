@@ -7,10 +7,6 @@ angular.module('MyApp', ['ngRoute', 'satellizer'])
         templateUrl: 'partials/home.html',
         controller: 'HomeCtrl'
       })
-      .when('/search', {
-        templateUrl: 'partials/search.html',
-        controller: 'ContactCtrl'
-      })
       .when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl',

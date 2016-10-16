@@ -83,12 +83,13 @@ exports.signupPost = function(req, res, next) {
       business = new Business({
         name: req.body.name,
         email: req.body.email,
+        shares: 0,
         password: req.body.password,
         desc: req.body.desc,
         address: req.body.address,
       });
       business.save(function(err) {
-      res.send({ token: generateToken(business), user: business });
+        res.send({ token: generateToken(business), user: business });
       });
     });
     
