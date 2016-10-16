@@ -11,6 +11,7 @@ exports.createContract = function(req, res, next) {
     var contract = new Contract({
         name: req.body.name,
         businessname: req.body.businessname,
+        businessaddress: req.body.businessaddress,
         pricePerShare: req.body.pricePerShare,
         duration: req.body.duration,
         numOfShares: req.body.numOfShares,
@@ -32,17 +33,19 @@ exports.createContract = function(req, res, next) {
                     price: contract.pricePerShare,
                     duration: contract.duration
                 };
-                var info2 = ethController.createContract(info);
-                contract.saleAddress = info2.saleAddress;
-                contract.shareholderAddress = info2.shareholderAddress;
-                contract.shareAddress = info2.shareAddress;
-                
-                contract.save(function(err, contract) {
-                    console.log(contract);
-                    res.send({
-                        contract: contract
+                ethController.createContract(info, function(err, addresses){
+                    contract.saleAddress = addresses.saleAddress;
+                    contract.shareholderAddress = addresses.shareholderAddress;
+                    contract.shareAddress = addresses.shareAddress;
+                    
+                    contract.save(function(err, contract) {
+                        console.log(contract);
+                        res.send({
+                            contract: contract
+                        });
                     });
                 });
+                
             });
         });
 };

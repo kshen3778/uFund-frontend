@@ -13,38 +13,40 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
     };
 
     $scope.chartOptions = {
-    scales: {
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          display: true,
-          position: 'left'
+        scales: {
+            yAxes: [{
+                id: 'y-axis-1',
+                type: 'linear',
+                display: true,
+                position: 'left'
+            }]
         }
-      ]
-    }
-  };
+    };
     $scope.address = "";
     $scope.contracts = [];
 
     $scope.loadContracts = function() {
         Contract.loadContracts().then(function(response) {
-                response.data.forEach(function(item){
+            response.data.forEach(function(item) {
                 BusinessInfo.getInfo(item.address).then(function(res) {
                     var contractInfo = item;
-                    console.log(res);
                     contractInfo.chartLabels = [];
                     contractInfo.chartData = [];
                     for (var i = 0; i < res.data.length; i++) {
                         contractInfo.chartLabels.push(res.data[i].date);
                         contractInfo.chartData.push(res.data[i].value);
-                        //Integer.parseInt(
                     }
                     BusinessInfo.getInfo(item.address).then(function(res) {
-                        
+                        contractInfo.chartLabels2 = [];
+                        contractInfo.chartData2 = [];
+                        var numShares = 0;
+                        for (var i = 0; i < res.data.length; i++) {
+                            contractInfo.chartLabels.push(res.data[i].date);
+                            numShares+=(res.data[i].value/item.shareprice);
+                            contractInfo.chartData.push(numShares);
+                        }
+                        $scope.contracts.push(contractInfo);
                     });
-                    
-                    $scope.contracts.push(contractInfo);
                 });
             });
         });
