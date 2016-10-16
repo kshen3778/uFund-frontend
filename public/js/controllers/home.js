@@ -3,7 +3,7 @@ angular.module('MyApp').controller('HomeCtrl', function($scope, $rootScope, $loc
     $scope.theuser = $rootScope.currentUser;
     Chart.defaults.global.colors = ['#5cb360', '#DCDCDC', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
     $scope.sendContract = function() {
-        $scope.contract.address = $rootScope.currentUser.address;
+        $scope.contract.businessaddress = $rootScope.currentUser.address;
         $scope.contract.businessname = $rootScope.currentUser.name;
         console.log($scope.contract);
         Contract.sendContract($scope.contract).then(function(response) {

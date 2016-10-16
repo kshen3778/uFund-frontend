@@ -64,6 +64,9 @@
           <div class="panel-body" ng-repeat="contract in businessContracts">
             <div class="form-group">
               <h5><b>NAME:</b> {{contract.name}}</h5>
+              <h6><b>SALE ADDRESS:</b> {{contract.saleAddress}}</h6>
+              <h6><b>SHARE ADDRESS:</b> {{contract.shareAddress}}</h6>
+              <h6><b>SHAREHOLDER ADDRESS:</b> {{contract.shareholderAddress}}</h6>
               <h5><b>PRICE PER SHARE:</b> {{contract.pricePerShare}} Ether</h5>
               <h5><b>TIME DURATION:</b> {{contract.duration}}</h5>
               <h5><b>NUMBER OF SHARES:</b> {{contract.numOfShares}}</h5>
@@ -108,10 +111,11 @@
     <div ng-repeat="contract in contracts">
       <!-- loop through contracts -->
       <div class="panel">
-        <div class="panel-body" >
+        <div class="panel-body">
           <div class="form-group">
             <h4><b>BUSINESS NAME:</b> {{contract.businessname}}</h4>
-            <h6><b>ADDRESS:</b> {{contract.address}}</h6>
+            <h6><b>SALE ADDRESS:</b> {{contract.saleAddress}}</h6>
+            <h6><b>SHARE ADDRESS:</b> {{contract.shareAddress}}</h6>
           </div>
 
         </div>
@@ -128,8 +132,11 @@
 
             </div>
 
-            <div class="col-sm-7">
+            <div class="col-sm-5">
               <canvas id="businessInfoChart" class="chart chart-line" chart-data="contract.chartData" chart-labels="contract.chartLabels" chart-options="chartOptions" chart-dataset-override="datasetOverride" width="700" height="300" style="margin-top: 30px;"></canvas>
+            </div>
+            <div class="col-sm-5">
+              <canvas class="chart chart-doughnut" chart-data="contract.pieData" chart-labels="contract.pieLabels" chart-colours="pieColours" width="150" height="150"></canvas>
             </div>
           </div>
         </div>
